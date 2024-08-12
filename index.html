@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Photo Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #not-found {
+            color: red;
+            display: none;
+            margin-top: 20px;
+        }
+        #student-photo {
+            display: none;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Student Photo</h1>
+    <input type="text" id="rollno" placeholder="Enter Roll No">
+    <button onclick="findPhoto()">Find</button>
+
+    <div id="not-found">NO ROLLNO FOUND</div>
+    <img id="student-photo" alt="Student Photo">
+
+    <script>
+        function findPhoto() {
+            const rollno = document.getElementById('rollno').value.trim();
+            const imageUrl = `https://dhondi.cmrithyderabad.edu.in/sharedfiles/e0d341de643812c29a19aac35b9e7d87/studentPhotos/${rollno}.jpg`;
+            
+            const img = document.getElementById('student-photo');
+            const notFound = document.getElementById('not-found');
+            
+            img.style.display = 'none';
+            notFound.style.display = 'none';
+
+            img.onerror = function() {
+                img.style.display = 'none';
+                notFound.style.display = 'block';
+            };
+            
+            img.onload = function() {
+                notFound.style.display = 'none';
+                img.style.display = 'block';
+                img.src = imageUrl;
+            };
+            
+            img.src = imageUrl;
+        }
+    </script>
+
+</body>
+</html>
